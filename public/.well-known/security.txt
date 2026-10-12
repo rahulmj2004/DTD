@@ -1,0 +1,4 @@
+# Destroy The Decibel — event website
+# To report a security problem, contact the event coordinators listed on the site's Contact section.
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: en
