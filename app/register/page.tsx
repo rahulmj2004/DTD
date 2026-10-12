@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CoordinatorList } from "@/components/ui/CoordinatorList";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { RegistrationSteps } from "@/components/ui/RegistrationSteps";
 import { EVENT, formatInr } from "@/lib/event";
 
 export const metadata: Metadata = {
@@ -38,12 +37,6 @@ export default function RegisterPage() {
 
       <div className="mx-auto max-w-[1600px] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <h2 className="label-tech flex items-center gap-4 text-silver/70">
-          <span className="h-px w-10 bg-fire" aria-hidden="true" />
-          Three steps to a lot number
-        </h2>
-        <RegistrationSteps className="mt-8" />
-
-        <h2 id="coordinators" className="label-tech mt-16 flex scroll-mt-28 items-center gap-4 text-silver/70">
           <span className="h-px w-10 bg-fire" aria-hidden="true" />
           Contact the coordinators to register
         </h2>

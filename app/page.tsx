@@ -11,9 +11,7 @@ import { InfoStrip } from "@/components/sections/InfoStrip";
 import { Venue } from "@/components/sections/Venue";
 import { Trailer } from "@/components/sections/Trailer";
 import { Prizes } from "@/components/sections/Prizes";
-import { RegisterBand } from "@/components/sections/RegisterBand";
 import { RulesTeaser } from "@/components/sections/RulesTeaser";
-import { SoundCheck } from "@/components/sections/SoundCheck";
 import { EVENT } from "@/lib/event";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -66,12 +64,10 @@ export default function HomePage() {
       <InfoStrip />
       <Guest />
       <About />
-      <SoundCheck />
       <HowItWorks />
       <Builds />
       <Prizes />
       <RulesTeaser />
-      <RegisterBand />
       <Faq />
       <Venue />
       <Contact />

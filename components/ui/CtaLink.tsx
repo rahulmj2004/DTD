@@ -4,8 +4,6 @@ import type { ComponentProps, ReactNode } from "react";
 type CtaLinkProps = Omit<ComponentProps<typeof Link>, "className"> & {
   variant?: "primary" | "ghost";
   size?: "md" | "sm";
-  /** Adds a slow light sweep; reserve it for the one primary action on screen. */
-  sweep?: boolean;
   className?: string;
   children: ReactNode;
 };
@@ -28,13 +26,12 @@ const sizes = {
 export function CtaLink({
   variant = "primary",
   size = "md",
-  sweep = false,
   className = "",
   children,
   ...props
 }: CtaLinkProps) {
   return (
-    <Link className={`${base} ${variants[variant]} ${sizes[size]} ${sweep ? "cta-sweep overflow-hidden" : ""} ${className}`} {...props}>
+    <Link className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} {...props}>
       {children}
     </Link>
   );

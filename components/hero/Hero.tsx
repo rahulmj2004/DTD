@@ -10,9 +10,8 @@ import {
 } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef, useState, useSyncExternalStore, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { DecibelBars } from "@/components/animations/DecibelBars";
-import { SoundWave } from "@/components/animations/SoundWave";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { EVENT, formatInr } from "@/lib/event";
 import { useIgnited } from "@/lib/ignition";
@@ -27,25 +26,8 @@ const FACTS = [
   { label: "Location", value: EVENT.location },
 ] as const;
 
-const DAY_MS = 86_400_000;
-const EVENT_START = Date.parse(`${EVENT.dateIso}T00:00:00+05:30`);
-const noSubscription = () => () => {};
-
-/** Whole days until event day in the visitor's clock; null on the server and once the day has passed. */
-function daysToGo() {
-  const days = Math.ceil((EVENT_START - Date.now()) / DAY_MS);
-  return days >= 0 ? days : null;
-}
-
-function countdownLabel(days: number) {
-  if (days === 0) return "Event day";
-  if (days === 1) return "Tomorrow";
-  return `${String(days).padStart(2, "0")} days to go`;
-}
-
 export function Hero() {
   const ignited = useIgnited();
-  const days = useSyncExternalStore(noSubscription, daysToGo, () => null);
   const [filmPlaying, setFilmPlaying] = useState(false);
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
@@ -133,42 +115,19 @@ export function Hero() {
         <div className="anim-streak h-px w-1/3 bg-gradient-to-r from-transparent via-cyan to-transparent" />
       </div>
 
-      {/* Sound wave running under the headline (desktop: the phone layout stacks the film there) */}
-      <SoundWave className="absolute inset-x-0 top-[52%] -z-10 hidden h-28 opacity-60 md:block" />
-
       {/* ---------- Headline ---------- */}
       <div className="order-1 mx-auto w-full max-w-[1600px] px-5 pt-24 sm:px-8 md:pt-28 lg:px-12">
-        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
-          <motion.p
-            className="label-tech text-[0.5625rem] text-silver/80 sm:text-[0.6875rem]"
-            initial={initial}
-            animate={state}
-            variants={{
-              hidden: { opacity: 0, letterSpacing: "0.6em" },
-              show: { opacity: 1, letterSpacing: "0.32em", transition: { duration: 1.2, ease: EASE } },
-            }}
-          >
-            {EVENT.department}
-          </motion.p>
-          {days !== null && (
-            <motion.p
-              className="label-tech flex items-center gap-3 border border-racing/50 bg-obsidian/60 px-3 py-2 text-[0.5625rem] text-paper sm:text-[0.6875rem]"
-              initial={initial}
-              animate={state}
-              variants={{
-                hidden: { opacity: 0, x: 16 },
-                show: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.9, ease: EASE } },
-              }}
-            >
-              <span className="relative grid size-2 place-items-center" aria-hidden="true">
-                <span className="absolute inset-0 animate-ping rounded-full bg-racing motion-reduce:hidden" />
-                <span className="relative block size-2 rounded-full bg-racing" />
-              </span>
-              {countdownLabel(days)}
-              <span className="text-silver/60">· {EVENT.dateShort}</span>
-            </motion.p>
-          )}
-        </div>
+        <motion.p
+          className="label-tech text-[0.5625rem] text-silver/80 sm:text-[0.6875rem]"
+          initial={initial}
+          animate={state}
+          variants={{
+            hidden: { opacity: 0, letterSpacing: "0.6em" },
+            show: { opacity: 1, letterSpacing: "0.32em", transition: { duration: 1.2, ease: EASE } },
+          }}
+        >
+          {EVENT.department}
+        </motion.p>
 
         <h1
           className="display mt-5 text-[clamp(3.25rem,19vw,7rem)] text-paper md:text-[clamp(5rem,10.5vw,12.5rem)]"
@@ -217,7 +176,7 @@ export function Hero() {
               <span className="text-silver/70">One chance to own the sound.</span>
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <CtaLink href="/register" sweep>
+              <CtaLink href="/register">
                 Register your vehicle
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </CtaLink>
