@@ -5,11 +5,15 @@ import { CseLogo, Logo } from "@/components/ui/Logo";
 import { EVENT } from "@/lib/event";
 
 const FOOTER_LINKS = [
+  { label: "About", href: "/#about" },
+  { label: "Sound check", href: "/#measurement" },
   { label: "Competition", href: "/#competition" },
   { label: "Guest", href: "/#guest" },
   { label: "Builds", href: "/#gallery" },
+  { label: "Prizes", href: "/#prizes" },
   { label: "Rules", href: "/rules" },
   { label: "Registration", href: "/register" },
+  { label: "FAQ", href: "/#faq" },
   { label: "Venue", href: "/#venue" },
   { label: "Contact", href: "/#contact" },
 ] as const;
@@ -53,7 +57,7 @@ export function Footer() {
 
           <nav aria-label="Footer">
             <p className="label-tech mb-4 text-silver/50">Navigate</p>
-            <ul className="space-y-2">
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2 sm:max-w-xs">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link

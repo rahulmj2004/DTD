@@ -14,8 +14,16 @@ export const EVENT = {
   /** Shown wherever the site names the location. */
   location: "Vidya Academy of Science and Technology, Thrissur",
   developer: "Rahul M J",
+  /** The developer's own photo and profiles, shown in the footer credit. */
+  developerPhoto: "/images/team/rahul-mj.jpg",
+  developerLinks: {
+    linkedin: "https://www.linkedin.com/in/rahulmj2004/",
+    instagram: "https://www.instagram.com/rahul110_/",
+  },
   dateLabel: "October 17, 2026",
   dateShort: "17 OCT 2026",
+  /** Machine-readable event date (India Standard Time). */
+  dateIso: "2026-10-17",
   prizePool: 40000,
   entryFee: 1000,
   maxEngineCc: 2000,

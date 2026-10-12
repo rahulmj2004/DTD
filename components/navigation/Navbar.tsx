@@ -1,23 +1,58 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { CseLogo, Logo } from "@/components/ui/Logo";
-import { NAV_LINKS } from "@/lib/event";
+import { EVENT, NAV_LINKS } from "@/lib/event";
+
+/** Home-page sections that light up a nav link while they are on screen. */
+const SPY_SECTIONS = ["about", "competition", "prizes", "rules", "faq"] as const;
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [section, setSection] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
 
+  // Redline along the header's lower edge: how far down the page you are.
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 24);
+      // A section is "current" while it covers the line 40% down the viewport.
+      const line = window.innerHeight * 0.4;
+      let current: string | null = null;
+      for (const id of SPY_SECTIONS) {
+        const rect = document.getElementById(id)?.getBoundingClientRect();
+        if (rect && rect.top <= line && rect.bottom > line) current = id;
+      }
+      setSection(current);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [pathname]);
+
+  const isActive = (href: string) => {
+    if (!href.startsWith("/#")) return pathname === href || (href === "/rules" && section === "rules");
+    return pathname === "/" && href === `/#${section}`;
+  };
+  /** A whole page is "page"; a section of the page you are on is "location". */
+  const current = (href: string) => (isActive(href) ? (pathname === href ? "page" : "location") : undefined);
 
   useEffect(() => {
     if (!open) return;
@@ -59,17 +94,18 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="label-tech group relative py-2 text-silver/80 transition-colors hover:text-paper"
+                aria-current={current(link.href)}
+                className="label-tech group relative py-2 text-silver/80 transition-colors hover:text-paper aria-[current]:text-paper"
               >
                 {link.label}
-                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-fire transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-fire transition-transform duration-300 group-hover:scale-x-100 group-aria-[current]:scale-x-100" />
               </Link>
             </li>
           ))}
         </ul>
 
         <div className="flex items-center gap-2">
-          <CtaLink href="/register" size="sm" onClick={() => setOpen(false)}>
+          <CtaLink href="/register" size="sm" aria-current={current("/register")} onClick={() => setOpen(false)}>
             Register
           </CtaLink>
           <button
@@ -84,6 +120,14 @@ export function Navbar() {
           </button>
         </div>
       </nav>
+
+      {!open && (
+        <motion.span
+          className="absolute inset-x-0 -bottom-px h-px origin-left bg-gradient-to-r from-fire to-racing"
+          style={{ scaleX: progress }}
+          aria-hidden="true"
+        />
+      )}
 
       <AnimatePresence>
         {open && (
@@ -107,8 +151,9 @@ export function Navbar() {
                   >
                     <Link
                       href={link.href}
+                      aria-current={current(link.href)}
                       onClick={() => setOpen(false)}
-                      className="display flex items-baseline gap-4 py-4 text-5xl text-paper active:text-fire"
+                      className="display flex items-baseline gap-4 py-4 text-5xl text-paper active:text-fire aria-[current]:text-fire"
                     >
                       <span className="label-tech text-fire">0{i + 1}</span>
                       {link.label}
@@ -117,7 +162,7 @@ export function Navbar() {
                 ))}
               </ul>
               <p className="label-tech mt-auto pt-10 text-silver/50">
-                17 Oct 2026 · Vidya Academy of Science and Technology, Thrissur
+                {EVENT.dateShort} · {EVENT.location}
               </p>
             </div>
           </motion.div>

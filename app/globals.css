@@ -306,3 +306,75 @@ html[data-ignited] .dtd-loader {
     background-position: 50% 0;
   }
 }
+
+/* ---------- Sound-wave line (scrolls sideways, tiles at 50%) ---------- */
+
+.anim-wave {
+  animation: marquee 14s linear infinite;
+  will-change: transform;
+}
+
+/* Rings leaving the exhaust in the measurement diagram. */
+@keyframes ripple {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+  40% {
+    opacity: 0.95;
+  }
+}
+.anim-ripple {
+  animation: ripple 2.2s ease-in-out infinite;
+}
+
+/* Light sweep across the primary call-to-action. */
+@keyframes cta-sweep {
+  0%,
+  55% {
+    transform: translateX(-140%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(340%) skewX(-20deg);
+  }
+}
+.cta-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+  animation: cta-sweep 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-wave,
+  .anim-ripple {
+    animation: none;
+  }
+  .anim-ripple {
+    opacity: 0.5;
+  }
+  .cta-sweep::after {
+    display: none;
+  }
+}
+
+/* ---------- Gallery lightbox ---------- */
+
+.dtd-lightbox {
+  max-width: none;
+  max-height: none;
+}
+.dtd-lightbox::backdrop {
+  background: rgb(5 7 10 / 0.94);
+}
+.dtd-lightbox[open] {
+  animation: stage-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dtd-lightbox[open] {
+    animation: none;
+  }
+}

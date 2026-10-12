@@ -10,6 +10,9 @@ import { TIMELINE } from "@/lib/event";
  * Event-day timeline. GSAP ScrollTrigger owns every animation in this section:
  * the redline scrubs with scroll and each step lights up as it passes.
  * Nothing is pinned, so native scrolling is never interrupted.
+ * The section clips horizontally because steps slide in from the right, which
+ * would otherwise widen the page on phones (clip, unlike hidden, keeps the
+ * sticky heading working).
  */
 export function HowItWorks() {
   const root = useRef<HTMLDivElement>(null);
@@ -43,7 +46,7 @@ export function HowItWorks() {
   }, []);
 
   return (
-    <section id="competition" className="relative scroll-mt-20 border-t border-silver/10 bg-carbon py-24 lg:py-40">
+    <section id="competition" className="relative scroll-mt-20 overflow-x-clip border-t border-silver/10 bg-carbon py-24 lg:py-40">
       <div className="bg-grid absolute inset-0 opacity-60" aria-hidden="true" />
       <div ref={root} className="relative mx-auto grid max-w-[1600px] gap-16 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-12">
         <div className="lg:sticky lg:top-28 lg:self-start">
