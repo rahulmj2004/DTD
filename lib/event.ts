@@ -13,13 +13,25 @@ export const EVENT = {
   college: "Vidya Academy of Science and Technology",
   /** Shown wherever the site names the location. */
   location: "Vidya Academy of Science and Technology, Thrissur",
-  developer: "Rahul M J",
-  /** The developer's own photo and profiles, shown in the footer credit. */
-  developerPhoto: "/images/team/rahul-mj.jpg",
-  developerLinks: {
-    linkedin: "https://www.linkedin.com/in/rahulmj2004/",
-    instagram: "https://www.instagram.com/rahul110_/",
-  },
+  /** The developers' own photos and profiles, shown in the footer credit. */
+  developers: [
+    {
+      name: "Rahul M J",
+      photo: "/images/team/rahul-mj.jpg",
+      links: {
+        linkedin: "https://www.linkedin.com/in/rahulmj2004/",
+        instagram: "https://www.instagram.com/rahul110_/",
+      },
+    },
+    {
+      name: "Advaith U",
+      photo: "/images/team/advaith-u.jpg",
+      links: {
+        linkedin: "https://www.linkedin.com/in/advaithullaskumar/",
+        instagram: "https://www.instagram.com/adxaith_here/",
+      },
+    },
+  ],
   dateLabel: "October 17, 2026",
   dateShort: "17 OCT 2026",
   /** Machine-readable event date (India Standard Time). */
@@ -169,7 +181,7 @@ export type Coordinator = {
 
 export const COORDINATORS: Coordinator[] = [
   { name: "Aravind Krishna", display: "8590474771", tel: "+918590474771", whatsappVerified: false },
-  { name: "Adharv Jayan", display: "+91 77360 46553", tel: "+917736046553", whatsappVerified: false },
+  { name: "Adharv", display: "+91 77360 46553", tel: "+917736046553", whatsappVerified: false },
   { name: "Adwaith C Shaju", display: "+91 6238 384 063", tel: "+916238384063", whatsappVerified: false },
 ];
 

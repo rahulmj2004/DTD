@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { DeveloperCredit } from "@/components/navigation/DeveloperCredit";
 import { Emblem } from "@/components/ui/Emblem";
 import { CseLogo, Logo } from "@/components/ui/Logo";
 import { EVENT } from "@/lib/event";
@@ -72,7 +71,6 @@ export function Footer() {
           <p>{EVENT.dateShort} · {EVENT.location}</p>
           <p>Schedule and rules subject to the official organizers&rsquo; instructions</p>
         </div>
-        <DeveloperCredit />
       </div>
     </footer>
   );

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   description,
   applicationName: EVENT.name,
-  authors: [{ name: EVENT.developer }],
+  authors: EVENT.developers.map(({ name }) => ({ name })),
   keywords: [
     "Destroy The Decibel",
     "DTD",

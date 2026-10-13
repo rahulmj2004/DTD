@@ -2,6 +2,7 @@ import { Loader } from "@/components/animations/Loader";
 import { Hero } from "@/components/hero/Hero";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
+import { Developers } from "@/components/sections/Developers";
 import { Builds } from "@/components/sections/Builds";
 import { Machine } from "@/components/sections/Machine";
 import { Faq } from "@/components/sections/Faq";
@@ -63,6 +64,7 @@ export default function HomePage() {
       <Trailer />
       <InfoStrip />
       <Guest />
+      <Developers />
       <About />
       <HowItWorks />
       <Builds />
