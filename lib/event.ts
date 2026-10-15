@@ -38,6 +38,8 @@ export const EVENT = {
   dateIso: "2026-10-17",
   prizePool: 40000,
   entryFee: 1000,
+  /** Flip to true to reopen registration across the site. */
+  registrationOpen: false,
   maxEngineCc: 2000,
   finalists: 4,
   venue: {

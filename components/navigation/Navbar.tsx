@@ -4,9 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CtaLink } from "@/components/ui/CtaLink";
+import { ClosedTag, CtaLink } from "@/components/ui/CtaLink";
 import { CseLogo, Logo } from "@/components/ui/Logo";
-import { NAV_LINKS } from "@/lib/event";
+import { EVENT, NAV_LINKS } from "@/lib/event";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -69,9 +69,13 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <CtaLink href="/register" size="sm" onClick={() => setOpen(false)}>
-            Register
-          </CtaLink>
+          {EVENT.registrationOpen ? (
+            <CtaLink href="/register" size="sm" onClick={() => setOpen(false)}>
+              Register
+            </CtaLink>
+          ) : (
+            <ClosedTag size="sm" className="hidden sm:inline-flex" />
+          )}
           <button
             type="button"
             className="grid size-10 place-items-center text-paper lg:hidden"
@@ -97,7 +101,7 @@ export function Navbar() {
           >
             <div className="bg-grid flex min-h-full flex-col px-5 pb-10 pt-8 sm:px-8">
               <ul>
-                {[...NAV_LINKS, { label: "Register", href: "/register" }].map((link, i) => (
+                {[...NAV_LINKS, { label: EVENT.registrationOpen ? "Register" : "Registration closed", href: "/register" }].map((link, i) => (
                   <motion.li
                     key={link.href}
                     initial={{ opacity: 0, x: -24 }}

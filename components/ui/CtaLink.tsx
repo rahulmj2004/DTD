@@ -36,3 +36,15 @@ export function CtaLink({
     </Link>
   );
 }
+
+/** Non-interactive stand-in for the register CTA once registration has closed. */
+export function ClosedTag({ size = "md", className = "" }: { size?: "md" | "sm"; className?: string }) {
+  return (
+    <span
+      className={`${base} ${sizes[size]} cursor-not-allowed bg-paper/5 text-silver/70 shadow-[inset_0_0_0_1px_rgb(201_208_214/0.25)] ${className}`}
+    >
+      <span className="block size-1.5 rotate-45 bg-fire" aria-hidden="true" />
+      Registration closed
+    </span>
+  );
+}

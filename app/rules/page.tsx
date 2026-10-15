@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { RulesExplorer } from "@/components/rules/RulesExplorer";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { RULES } from "@/lib/event";
+import { EVENT, RULES } from "@/lib/event";
 
 export const metadata: Metadata = {
   title: "Rules and Regulations",
@@ -40,7 +40,7 @@ export default function RulesPage() {
             <CtaLink href="/#contact" variant="ghost">
               Contact coordinators
             </CtaLink>
-            <CtaLink href="/register">Register your vehicle</CtaLink>
+            {EVENT.registrationOpen && <CtaLink href="/register">Register your vehicle</CtaLink>}
           </div>
         </div>
       </div>

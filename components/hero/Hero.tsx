@@ -12,7 +12,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { DecibelBars } from "@/components/animations/DecibelBars";
-import { CtaLink } from "@/components/ui/CtaLink";
+import { ClosedTag, CtaLink } from "@/components/ui/CtaLink";
 import { EVENT, formatInr } from "@/lib/event";
 import { useIgnited } from "@/lib/ignition";
 
@@ -176,10 +176,14 @@ export function Hero() {
               <span className="text-silver/70">One chance to own the sound.</span>
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <CtaLink href="/register">
-                Register your vehicle
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </CtaLink>
+              {EVENT.registrationOpen ? (
+                <CtaLink href="/register">
+                  Register your vehicle
+                  <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </CtaLink>
+              ) : (
+                <ClosedTag />
+              )}
               <CtaLink href="/rules" variant="ghost">
                 Explore the rules
               </CtaLink>

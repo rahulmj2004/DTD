@@ -1,6 +1,6 @@
 import { Counter } from "@/components/animations/Counter";
 import { Reveal } from "@/components/animations/Reveal";
-import { CtaLink } from "@/components/ui/CtaLink";
+import { ClosedTag, CtaLink } from "@/components/ui/CtaLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EVENT } from "@/lib/event";
 
@@ -44,7 +44,7 @@ export function Prizes() {
               be split equally between them.
             </p>
           </div>
-          <CtaLink href="/register">Claim your lot</CtaLink>
+          {EVENT.registrationOpen ? <CtaLink href="/register">Claim your lot</CtaLink> : <ClosedTag />}
         </div>
       </div>
     </section>

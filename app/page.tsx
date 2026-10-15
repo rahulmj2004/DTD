@@ -46,6 +46,7 @@ const eventJsonLd = {
     name: "Vehicle registration",
     price: EVENT.entryFee,
     priceCurrency: "INR",
+    availability: EVENT.registrationOpen ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
     url: `${siteUrl}/register`,
   },
 };
