@@ -13,7 +13,7 @@ export const EVENT = {
   college: "Vidya Academy of Science and Technology",
   /** Shown wherever the site names the location. */
   location: "Vidya Academy of Science and Technology, Thrissur",
-  /** The developers' own photos and profiles, shown in the footer credit. */
+  /** The developer's own photo and profiles, shown in the footer credit. */
   developers: [
     {
       name: "Rahul M J",
@@ -21,14 +21,6 @@ export const EVENT = {
       links: {
         linkedin: "https://www.linkedin.com/in/rahulmj2004/",
         instagram: "https://www.instagram.com/rahul110_/",
-      },
-    },
-    {
-      name: "Advaith U",
-      photo: "/images/team/advaith-u.jpg",
-      links: {
-        linkedin: "https://www.linkedin.com/in/advaithullaskumar/",
-        instagram: "https://www.instagram.com/adxaith_here/",
       },
     },
   ],
