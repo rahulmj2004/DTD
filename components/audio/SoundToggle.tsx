@@ -84,7 +84,8 @@ export function SoundToggle() {
       const from = el.volume;
       const started = performance.now();
       const step = (now: number) => {
-        const t = Math.min(1, (now - started) / ms);
+        // The frame timestamp can predate `started`, so clamp both ends.
+        const t = Math.min(1, Math.max(0, (now - started) / ms));
         el.volume = from + (target - from) * t;
         if (t < 1) fadeFrame = requestAnimationFrame(step);
       };

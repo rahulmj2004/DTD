@@ -11,7 +11,7 @@ const VIEWPORT = { once: true, margin: "0px 0px -12% 0px" } as const;
 const HEADLINE = [
   { text: "Meet", className: "" },
   { text: "the", className: "" },
-  { text: "developer.", className: "text-racing" },
+  { text: "developers.", className: "text-racing" },
 ] as const;
 
 /** Letters that rise out of a clipped line, one after another. */
@@ -31,7 +31,7 @@ function RisingLetters({ text, delay = 0, step = 0.05 }: { text: string; delay?:
 }
 
 /**
- * The person who built this site. As the section scrolls into view the
+ * The people who built this site. As the section scrolls into view the
  * headline rises in letter by letter, each card lifts up, the portrait pops
  * inside a turning ring, and a redline draws under a name crossed by a sheen.
  */
@@ -60,7 +60,7 @@ export function Developers() {
           </motion.p>
           <h2
             id="developers-title"
-            aria-label="Meet the developer."
+            aria-label="Meet the developers."
             className="display mt-4 text-[clamp(1.75rem,4vw,3rem)] text-paper"
           >
             <span className="flex flex-wrap gap-x-[0.25em]" aria-hidden="true">
@@ -73,7 +73,7 @@ export function Developers() {
           </h2>
         </motion.div>
 
-        <ul className="mt-8 grid max-w-2xl gap-4 lg:gap-5">
+        <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:gap-5">
           {EVENT.developers.map((developer, i) => {
             const base = i * 0.15;
             return (
